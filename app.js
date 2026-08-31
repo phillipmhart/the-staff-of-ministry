@@ -25,7 +25,7 @@ function goHome() {
 
 function offlineHelp() {
   currentChapter = 0;
-  app.innerHTML = shell(`<h2>Play the game offline</h2><p>First, open the game while you have an internet connection. Once it has fully loaded, installing it lets you keep the game and its clues available without cell service.</p><aside class="history"><h3>iPhone or iPad</h3><ol><li>Open this game in <strong>Safari</strong>.</li><li>Tap the <strong>Share</strong> button.</li><li>Scroll down and choose <strong>Add to Home Screen</strong>.</li><li>Turn on <strong>Open as Web App</strong>, then tap <strong>Add</strong>.</li></ol></aside><aside class="history"><h3>Android</h3><ol><li>Open this game in <strong>Chrome</strong>.</li><li>Tap the <strong>three-dot menu</strong> beside the address bar.</li><li>Select <strong>Install app</strong>, or choose <strong>Add to Home screen</strong> and then <strong>Install</strong>.</li><li>Follow the on-screen instructions.</li></ol></aside><p class="notice"><strong>Before you head out:</strong> Open the installed game once while online and wait for it to finish loading. Then you can play without internet service.</p><button class="button" onclick="goHome()">Return to the welcome page</button>`);
+  app.innerHTML = shell(`<h2>Play the game offline</h2><p>First, open the game while you have an internet connection. Once it has fully loaded, installing it lets you keep the game and its clues available without cell service.</p><aside class="history"><h3>iPhone or iPad</h3><ol><li>Open this game in <strong>Safari</strong>.</li><li>Tap the <strong>three-dot menu</strong> at the bottom right.</li><li>Tap the <strong>Share</strong> button.</li><li>Scroll down and choose <strong>Add to Home Screen</strong>.</li><li>Turn on <strong>Open as Web App</strong>, then tap <strong>Add</strong>.</li></ol></aside><aside class="history"><h3>Android</h3><ol><li>Open this game in <strong>Chrome</strong>.</li><li>Tap the <strong>three-dot menu</strong> beside the address bar.</li><li>Select <strong>Install app</strong>, or choose <strong>Add to Home screen</strong> and then <strong>Install</strong>.</li><li>Follow the on-screen instructions.</li></ol></aside><p class="notice"><strong>Before you head out:</strong> Open the installed game once while online and wait for it to finish loading. Then you can play without internet service.</p><button class="button" onclick="goHome()">Return to the welcome page</button>`);
   window.scrollTo({ top: 0 });
 }
 function aboutCreator() {
@@ -271,7 +271,10 @@ function caseMap() {
   currentChapter = 0;
   const routes = [chapter1, chapter2, chapter3Start, chapter4, chapter5, chapter6, chapter7, chapter8];
   const names = ['Bliss Park', 'Harold’s Grinspoon’s Sculpture', 'Storrs Library', 'First Church of Christ', '20 Williams Street', "Ann Scibelli's Memorial", 'Razzmatazz Kids', 'The Longmeadow Shops'];
-  const buttons = routes.map((route, i) => state.done.includes(i) ? `<button class="button case-map-entry" onclick="caseMapOpen(${i})">Chapter ${i + 1} - ${names[i]}</button>` : `<button class="button ghost case-map-entry" disabled>Chapter ${i + 1} locked</button>`).join('');
+  const buttons = routes.map((route, i) => {
+    const unlocked = i === 0 || state.done.includes(i) || state.done.includes(i - 1);
+    return unlocked ? `<button class="button case-map-entry" onclick="caseMapOpen(${i})">Chapter ${i + 1} - ${names[i]}</button>` : `<button class="button ghost case-map-entry" disabled>Chapter ${i + 1} locked</button>`;
+  }).join('');
   app.innerHTML = shell(`<h2>Case map</h2><p>Select your case chapter. When you solve a case chapter, you unlock the next chapter.</p><section class="answer">${buttons}</section><button class="button ghost" onclick="goHome()">Return to the welcome page</button>`);
   window.scrollTo({ top: 0 });
 }
