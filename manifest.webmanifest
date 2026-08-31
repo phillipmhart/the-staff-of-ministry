@@ -1,0 +1,18 @@
+{
+  "name": "The Staff of Ministry",
+  "short_name": "Staff of Ministry",
+  "description": "A Longmeadow outdoor historical mystery adventure.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef3eb",
+  "theme_color": "#1c5b3b",
+  "icons": [
+    {
+      "src": "assets/five-of-hearts-card-no-frame.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
